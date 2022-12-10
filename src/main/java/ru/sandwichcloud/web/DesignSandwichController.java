@@ -2,6 +2,7 @@ package ru.sandwichcloud.web;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,8 +11,9 @@ import ru.sandwichcloud.Ingredient;
 import ru.sandwichcloud.Ingredient.Type;
 import ru.sandwichcloud.Sandwich;
 import ru.sandwichcloud.SandwichOrder;
+import ru.sandwichcloud.data.IngredientRepository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,20 +23,17 @@ import java.util.stream.Collectors;
 @SessionAttributes("sandwichOrder")
 public class DesignSandwichController {
 
+    private final IngredientRepository ingredientRepo;
+
+    @Autowired
+    public DesignSandwichController(IngredientRepository ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
+
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("DARK", "Dark Bread", Type.BREAD),
-                new Ingredient("WHTE", "White Bread", Type.BREAD),
-                new Ingredient("BEEF", "Beef", Type.PROTEIN),
-                new Ingredient("PORK", "Pork", Type.PROTEIN),
-                new Ingredient("TMTO", "Tomatoes", Type.VEGGIES),
-                new Ingredient("CMBR", "Cucumber", Type.VEGGIES),
-                new Ingredient("CHED", "Cheddar", Type.CHEESE),
-                new Ingredient("MSDM", "Maasdam", Type.CHEESE),
-                new Ingredient("MAYO", "Mayonnaise", Type.SAUCE),
-                new Ingredient("MTRD", "Mustard", Type.SAUCE)
-        );
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepo.findAll().forEach(ingredients::add);
 
         Type[] types = Type.values();
         for (Type type : types) {
