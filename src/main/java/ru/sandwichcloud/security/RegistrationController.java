@@ -29,14 +29,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
-        log.info("LOG_LOG_LOG");
-        log.info("username " + form.getUsername());
-        log.info("password " + form.getPassword());
-        log.info("fullname " + form.getFullname());
-        log.info("street " + form.getStreet());
-        log.info("city " + form.getCity());
-        log.info("subject " + form.getSubject());
-        log.info("phone " + form.getPhone());
+
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }

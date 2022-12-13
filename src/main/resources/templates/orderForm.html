@@ -14,7 +14,7 @@
         <input type="submit" value="Logout"/>
     </form>
 
-    <form method="POST" th:action="@{/orders}" th:object="${sandwichOrder}">
+    <form method="POST" th:action="@{/orders}" th:object="${sandwichOrder}" id="orderForm">
         <h1>Order your sandwich creations!</h1>
         <img th:src="@{/images/SandwichCloud.png}"/>
         <h3>Your sandwiches in this order:</h3>

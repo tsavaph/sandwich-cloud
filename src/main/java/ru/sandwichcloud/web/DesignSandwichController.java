@@ -73,7 +73,6 @@ public class DesignSandwichController {
 
     @GetMapping
     public String showDesignForm() {
-        System.out.println("AAAAAAAAAAAAA1");
         return "design";
     }
 
@@ -88,8 +87,6 @@ public class DesignSandwichController {
 
         Sandwich saved = sandwichRepo.save(sandwich);
         sandwichOrder.addSandwich(saved);
-
-        System.out.println("AAAAAAAAAAAAA2");
 
         return "redirect:/orders/current";
     }

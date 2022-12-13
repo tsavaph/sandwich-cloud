@@ -1,5 +1,6 @@
 package ru.sandwichcloud.security;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,8 +41,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()/*ignoringRequestMatchers(PathRequest.toH2Console())
-                .and()*/
+                .csrf().disable()
                 .headers(
                         headers -> headers
                                 .frameOptions()
@@ -88,6 +88,4 @@ public class SecurityConfig {
 //                );
 //        return http.build();
 //    }
-
-
 }

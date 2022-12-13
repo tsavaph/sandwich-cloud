@@ -25,7 +25,6 @@ public class OrderController {
     @GetMapping("/current")
     public String orderForm(@AuthenticationPrincipal User user,
                             @ModelAttribute SandwichOrder order) {
-        System.out.println("AAAAAAAAAAAAA3");
         if (order.getDeliveryName() == null) {
             order.setDeliveryName(user.getFullname());
         }
@@ -38,7 +37,7 @@ public class OrderController {
         if (order.getDeliverySubject() == null) {
             order.setDeliverySubject(user.getSubject());
         }
-        System.out.println("AAAAAAAAAAAAA4");
+
         return "orderForm";
     }
 
