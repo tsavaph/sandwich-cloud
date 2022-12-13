@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru</groupId>
 	<artifactId>sandwich-cloud</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>sandwich-cloud</name>
 	<description>Sandwich Cloud Pet Project</description>
 	<properties>
@@ -64,6 +64,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

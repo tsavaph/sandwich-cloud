@@ -7,21 +7,25 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
-public class SandwichOrder {
+public class SandwichOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @ManyToOne
+    private User user;
+
+    private Date placedAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private Date placedAt = new Date();
 
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
@@ -51,4 +55,8 @@ public class SandwichOrder {
         this.sandwiches.add(sandwich);
     }
 
+    @PrePersist
+    void placedAt() {
+        this.placedAt = new Date();
+    }
 }
