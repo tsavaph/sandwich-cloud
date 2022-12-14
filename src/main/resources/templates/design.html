@@ -1,70 +1,77 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Sandwich Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
-</head>
-<body>
-<h1>Design your sandwich!</h1>
-<img th:src="@{/images/SandwichCloud.png}"/>
-<form method="POST" th:object="${sandwich}">
-        <span class="validationError"
-              th:if="${#fields.hasErrors('ingredients')}"
-              th:errors="*{ingredients}">Ingredient Error
-        </span>
-    <div class="grid">
-        <div class="ingredient-group" id="breads">
-            <h3>Designate your bread:</h3>
-            <div th:each="ingredient : ${bread}">
-                <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+    <head>
+        <title>Sandwich Cloud</title>
+        <link rel="stylesheet" th:href="@{/styles.css}" />
+    </head>
+
+    <body>
+
+        <h1>Design your sandwich, <span th:text="${user.fullname}">NAME</span>!</h1>
+        <img th:src="@{/images/SandwichCloud.png}"/>
+
+        <form method="POST" th:action="@{/logout}" id="logoutForm">
+            <input type="submit" value="Logout"/>
+        </form>
+
+        <form method="POST" th:object="${sandwich}" th:action="@{/design}" id="sandwichForm">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('ingredients')}"
+                      th:errors="*{ingredients}">Ingredient Error
+                </span>
+            <div class="grid">
+                <div class="ingredient-group" id="breads">
+                    <h3>Designate your bread:</h3>
+                    <div th:each="ingredient : ${bread}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="proteins">
+                    <h3>Pick your protein:</h3>
+                    <div th:each="ingredient : ${protein}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="cheeses">
+                    <h3>Choose your cheese:</h3>
+                    <div th:each="ingredient : ${cheese}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="veggies">
+                    <h3>Determine your veggies:</h3>
+                    <div th:each="ingredient : ${veggies}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
+                </div>
+                <div class="ingredient-group" id="sauces">
+                    <h3>Select your sauce:</h3>
+                    <div th:each="ingredient : ${sauce}">
+                        <input th:field="*{ingredients}" type="checkbox"
+                               th:value="${ingredient.id}"/>
+                        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="ingredient-group" id="proteins">
-            <h3>Pick your protein:</h3>
-            <div th:each="ingredient : ${protein}">
-                <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            <div>
+                <h3>Name your sandwich creation:</h3>
+                <input type="text" th:field="*{name}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Sandwich Name Error
+                </span>
+                <br/>
+                <button>Submit Your Sandwich</button>
             </div>
-        </div>
-        <div class="ingredient-group" id="cheeses">
-            <h3>Choose your cheese:</h3>
-            <div th:each="ingredient : ${cheese}">
-                <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
-            </div>
-        </div>
-        <div class="ingredient-group" id="veggies">
-            <h3>Determine your veggies:</h3>
-            <div th:each="ingredient : ${veggies}">
-                <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
-            </div>
-        </div>
-        <div class="ingredient-group" id="sauces">
-            <h3>Select your sauce:</h3>
-            <div th:each="ingredient : ${sauce}">
-                <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
-            </div>
-        </div>
-    </div>
-    <div>
-        <h3>Name your sandwich creation:</h3>
-        <input type="text" th:field="*{name}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('name')}"
-              th:errors="*{name}">Sandwich Name Error
-        </span>
-        <br/>
-        <button>Submit Your Sandwich</button>
-    </div>
-</form>
-</body>
+        </form>
+    </body>
 </html>

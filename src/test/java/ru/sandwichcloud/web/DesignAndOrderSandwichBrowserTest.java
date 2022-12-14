@@ -44,52 +44,100 @@ public class DesignAndOrderSandwichBrowserTest {
     @Test
     public void testDesignASandwichPage_HappyPath() {
         browser.get(homePageUrl());
-        clickDesignASandwich();
-        assertDesignPageElements();
-        buildAndSubmitASandwich("Basic Sandwich", "DARK", "BEEF", "CHED", "TMTO", "MAYO");
+        doLogout();
+        assertLandedOnLoginPage(true);
+        doRegistration("testuser", "testpassword");
+        assertLandedOnLoginPage(false);
+        doLogin("testuser", "testpassword");
+        assertDesignPageElements(false);
+        buildAndSubmitASandwich(false, "DARK", "BEEF", "CHED", "TMTO", "MAYO");
         clickBuildAnotherSandwich();
-        buildAndSubmitASandwich("Another Sandwich", "WHTE", "PORK", "MSDM", "CMBR", "MTRD");
-        fillInAndSubmitOrderForm();
+        buildAndSubmitASandwich(false, "Another Sandwich", "WHTE", "PORK", "MSDM", "CMBR", "MTRD");
+        fillInAndSubmitOrderForm(true);
         assertThat(browser.getCurrentUrl()).isEqualTo(homePageUrl());
+        doLogout();
     }
 
     @Test
     public void testDesignASandwichPage_EmptyOrderInfo() {
         browser.get(homePageUrl());
-        clickDesignASandwich();
-        assertDesignPageElements();
-        buildAndSubmitASandwich("Basic Sandwich", "DARK", "BEEF", "CHED", "TMTO", "MAYO");
+        doLogout();
+        assertLandedOnLoginPage(true);
+        doRegistration("testuser2", "testpassword");
+        doLogin("testuser2", "testpassword");
+        assertDesignPageElements(false);
+        buildAndSubmitASandwich(false,"Basic Sandwich", "DARK", "BEEF", "CHED", "TMTO", "MAYO");
         submitEmptyOrderForm();
-        fillInAndSubmitOrderForm();
+        fillInAndSubmitOrderForm(true);
         assertThat(browser.getCurrentUrl()).isEqualTo(homePageUrl());
+        doLogout();
     }
 
     @Test
     public void testDesignASandwichPage_InvalidOrderInfo() {
         browser.get(homePageUrl());
-        clickDesignASandwich();
-        assertDesignPageElements();
-        buildAndSubmitASandwich("Basic Sandwich", "DARK", "BEEF", "CHED", "TMTO", "MAYO");
+        doLogout();
+        assertLandedOnLoginPage(true);
+        doRegistration("testuser3", "testpassword");
+        assertLandedOnLoginPage(false);
+        doLogin("testuser3", "testpassword");
+        assertDesignPageElements(false);
+        buildAndSubmitASandwich(false, "Basic Sandwich", "DARK", "BEEF", "CHED", "TMTO", "MAYO");
         submitInvalidOrderForm();
-        fillInAndSubmitOrderForm();
+        fillInAndSubmitOrderForm(true);
         assertThat(browser.getCurrentUrl()).isEqualTo(homePageUrl());
+        doLogout();
     }
 
     //
     // Browser test action methods
     //
-    private void buildAndSubmitASandwich(String name, String... ingredients) {
-        assertDesignPageElements();
+    private void buildAndSubmitASandwich(boolean isAnotherSandwich, String name, String... ingredients) {
+        assertDesignPageElements(isAnotherSandwich);
 
         for (String ingredient : ingredients) {
             browser.findElement(By.cssSelector("input[value='" + ingredient + "']")).click();
         }
         browser.findElement(By.cssSelector("input#name")).sendKeys(name);
-        browser.findElement(By.cssSelector("form")).submit();
+        browser.findElement(By.cssSelector("form#sandwichForm")).submit();
     }
 
-    private void assertDesignPageElements() {
-        assertThat(browser.getCurrentUrl()).isEqualTo(designPageUrl());
+    private void assertLandedOnLoginPage(boolean loginlogout) {
+        String loginPage = loginlogout ? loginPageUrl() + "?logout" : loginPageUrl();
+        assertThat(browser.getCurrentUrl()).isEqualTo(loginPage);
+    }
+
+    private void doRegistration(String username, String password) {
+        browser.findElement(By.linkText("here")).click();
+        assertThat(browser.getCurrentUrl()).isEqualTo(registrationPageUrl());
+        browser.findElement(By.name("username")).sendKeys(username);
+        browser.findElement(By.name("password")).sendKeys(password);
+        browser.findElement(By.name("confirm")).sendKeys(password);
+        browser.findElement(By.name("fullname")).sendKeys("Test Testov");
+        browser.findElement(By.name("street")).sendKeys("1234 Test Street");
+        browser.findElement(By.name("city")).sendKeys("Testgrad");
+        browser.findElement(By.name("subject")).sendKeys("Oblast");
+        browser.findElement(By.name("phone")).sendKeys("123-123-1234");
+        browser.findElement(By.cssSelector("form#registerForm")).submit();
+    }
+
+    private void doLogin(String username, String password) {
+        browser.findElement(By.cssSelector("input#username")).sendKeys(username);
+        browser.findElement(By.cssSelector("input#password")).sendKeys(password);
+        browser.findElement(By.cssSelector("form#loginForm")).submit();
+    }
+
+    private void doLogout() {
+        WebElement logoutForm = browser.findElement(By.cssSelector("form#logoutForm"));
+
+        if (logoutForm != null) {
+            logoutForm.submit();
+        }
+    }
+
+    private void assertDesignPageElements(boolean isContinue) {
+        String designPageUrl = isContinue ? designPageUrl() + "?continue" : designPageUrl();
+        assertThat(browser.getCurrentUrl()).isEqualTo(designPageUrl);
         List<WebElement> ingredientGroups = browser.findElements(By.className("ingredient-group"));
         assertThat(ingredientGroups.size()).isEqualTo(5);
 
@@ -125,8 +173,9 @@ public class DesignAndOrderSandwichBrowserTest {
     }
 
 
-    private void fillInAndSubmitOrderForm() {
-        assertThat(browser.getCurrentUrl()).startsWith(orderDetailsPageUrl());
+    private void fillInAndSubmitOrderForm(boolean current) {
+        String orderPage = current ? orderDetailsPageUrl() : currentOrderDetailsPageUrl();
+        assertThat(browser.getCurrentUrl()).startsWith(orderPage);
         fillField("input#deliveryName", "Ima Hungry");
         fillField("input#deliveryStreet", "1234 Culinary Blvd.");
         fillField("input#deliveryCity", "Foodsville");
@@ -134,12 +183,16 @@ public class DesignAndOrderSandwichBrowserTest {
         fillField("input#ccNumber", "4111111111111111");
         fillField("input#ccExpiration", "10/23");
         fillField("input#ccCVV", "123");
-        browser.findElement(By.cssSelector("form")).submit();
+        browser.findElement(By.cssSelector("form#orderForm")).submit();
     }
 
     private void submitEmptyOrderForm() {
         assertThat(browser.getCurrentUrl()).isEqualTo(currentOrderDetailsPageUrl());
-        browser.findElement(By.cssSelector("form")).submit();
+        fillField("input#deliveryName", "");
+        fillField("input#deliveryStreet", "");
+        fillField("input#deliveryCity", "");
+        fillField("input#deliverySubject", "");
+        browser.findElement(By.cssSelector("form#orderForm")).submit();
 
         assertThat(browser.getCurrentUrl()).isEqualTo(orderDetailsPageUrl());
 
@@ -173,7 +226,7 @@ public class DesignAndOrderSandwichBrowserTest {
         fillField("input#ccNumber", "1234432112344322");
         fillField("input#ccExpiration", "14/91");
         fillField("input#ccCVV", "1234");
-        browser.findElement(By.cssSelector("form")).submit();
+        browser.findElement(By.cssSelector("form#orderForm")).submit();
 
         assertThat(browser.getCurrentUrl()).isEqualTo(orderDetailsPageUrl());
 
@@ -196,12 +249,14 @@ public class DesignAndOrderSandwichBrowserTest {
                                   int ingredientIdx, String id, String name) {
         List<WebElement> proteins = ingredientGroup.findElements(By.tagName("div"));
         WebElement ingredient = proteins.get(ingredientIdx);
+
         assertThat(
-                ingredient.findElement(By.tagName("input")).getAttribute("value"))
-                .isEqualTo(id);
+                ingredient.findElement(By.tagName("input")).getAttribute("value")
+        ).isEqualTo(id);
+
         assertThat(
-                ingredient.findElement(By.tagName("span")).getText())
-                .isEqualTo(name);
+                ingredient.findElement(By.tagName("span")).getText()
+        ).isEqualTo(name);
     }
 
     private void clickDesignASandwich() {
@@ -210,7 +265,7 @@ public class DesignAndOrderSandwichBrowserTest {
     }
 
     private void clickBuildAnotherSandwich() {
-        assertThat(browser.getCurrentUrl()).startsWith(orderDetailsPageUrl());
+        assertThat(browser.getCurrentUrl()).startsWith(designPageUrl());
         browser.findElement(By.cssSelector("a[id='another']")).click();
     }
 
@@ -218,6 +273,13 @@ public class DesignAndOrderSandwichBrowserTest {
     //
     // URL helper methods
     //
+    private String loginPageUrl() {
+        return homePageUrl() + "login";
+    }
+
+    private String registrationPageUrl() {
+        return homePageUrl() + "register";
+    }
     private String designPageUrl() {
         return homePageUrl() + "design";
     }
