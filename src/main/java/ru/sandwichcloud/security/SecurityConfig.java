@@ -41,15 +41,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .headers(
-                        headers -> headers
-                                .frameOptions()
-                                .sameOrigin()
-                )
+                .csrf().ignoringRequestMatchers(PathRequest.toH2Console())
+                .and()
+                .headers((headers) -> headers.frameOptions().sameOrigin())
                 .authorizeHttpRequests()
-                    .requestMatchers("/design","/orders").hasRole("USER")
-                    .requestMatchers("/", "/**").permitAll()
+                .requestMatchers("/design","/orders").hasRole("USER")
+                .requestMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin(
                         form -> form
@@ -64,28 +61,4 @@ public class SecurityConfig {
                 );
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().ignoringRequestMatchers(PathRequest.toH2Console())
-//                .and()
-//                .headers((headers) -> headers.frameOptions().sameOrigin())
-//                .authorizeHttpRequests()
-//                .requestMatchers("/design","/orders").hasRole("USER")
-//                .requestMatchers("/", "/**").permitAll()
-//                .and()
-//                .formLogin(
-//                        form -> form
-//                                .loginPage("/login")
-//                                .loginProcessingUrl("/login")
-//                                .defaultSuccessUrl("/design")
-//                                .permitAll()
-//                ).logout(
-//                        logout -> logout
-//                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                                .permitAll()
-//                );
-//        return http.build();
-//    }
 }

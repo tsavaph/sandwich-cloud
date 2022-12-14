@@ -48,7 +48,7 @@ public class SandwichOrder implements Serializable {
     @Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Sandwich.class)
     private List<Sandwich> sandwiches = new ArrayList<>();
 
     public void addSandwich(Sandwich sandwich) {
