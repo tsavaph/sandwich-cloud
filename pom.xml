@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru</groupId>
 	<artifactId>sandwich-cloud</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<name>sandwich-cloud</name>
 	<description>Sandwich Cloud Pet Project</description>
 	<properties>
@@ -81,6 +81,11 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 			<version>3.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 	</dependencies>
