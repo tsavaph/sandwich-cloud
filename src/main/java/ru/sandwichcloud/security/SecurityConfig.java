@@ -18,21 +18,6 @@ import ru.sandwichcloud.data.UserRepository;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private UserRepository userRepository;
-
-
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepo) {
-        return username -> {
-            User user = userRepo.findByUsername(username);
-
-            if(user != null) {
-                return user;
-            }
-          throw new UsernameNotFoundException("User \"" + username + "\" not found");
-        };
-    }
-
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
