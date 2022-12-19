@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sandwichcloud</artifactId>
+    <packaging>jar</packaging>
+
+    <name>sandwichcloud</name>
+    <description>Sandwich Cloud Pet Project</description>
+
+    <parent>
+        <groupId>ru</groupId>
+        <artifactId>sandwich-cloud</artifactId>
+        <version>0.0.7-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+    </properties>
+
+
+    <dependencies>
+        <!-- sandwichCloud dependencies -->
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-data</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-domain</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-security</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-api</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency>
+        <!-- <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-ui</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency> -->
+
+        <!-- Run against embedded H2 database by default -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Actuator and DevTools...just because -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
