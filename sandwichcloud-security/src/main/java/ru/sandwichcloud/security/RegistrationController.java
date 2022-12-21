@@ -13,8 +13,8 @@ import ru.sandwichcloud.data.UserRepository;
 @Slf4j
 @RequestMapping("/register")
 public class RegistrationController {
-    @Autowired
-    UserRepository userRepo;
+
+    private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
 
     public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
@@ -29,7 +29,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
-
+        System.out.println("LOGLOLGG");
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }

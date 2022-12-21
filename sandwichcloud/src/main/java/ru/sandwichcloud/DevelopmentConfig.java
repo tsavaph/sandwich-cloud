@@ -65,7 +65,6 @@ public class DevelopmentConfig {
       sandwich3.setName("sandwich3");
       sandwich3.setIngredients(Arrays.asList(whiteBread, darkBread, beef, pork, tomatoes, cucumber, mayonnaise, mustard, cheddar, maasdam));
       sandwichRepo.save(sandwich3);
-
     };
   }
   

@@ -1,13 +1,3 @@
-= Sandwich Cloud - Chapter 7
-
-Note that this is a WIP README. For now, it will tersely describe how to build, test, and run the code in this folder.
-
-== Testing
-
-----
-$ ./mvnw test
-----
-
 == Building
 
 ----
@@ -30,10 +20,10 @@ Fetch a list of ingredients:
 $ curl localhost:8080/api/ingredients
 ----
 
-Fetch a list of recently created tacos:
+Fetch a list of recently created sandwiches:
 
 ----
-$ curl localhost:8080/api/tacos?recent
+$ curl localhost:8080/api/sandwiches?recent
 ----
 
 Fetch a list of orders:
@@ -57,13 +47,18 @@ $ curl localhost:8080/data-api/orders
 Fetch a list of tacos via the Spring Data REST-exposed API:
 
 ----
-$ curl localhost:8080/data-api/tacos
+$ curl localhost:8080/data-api/sandwiches
 ----
 
-Or just fetch all resource links fromt he Spring Data-REST exposed API:
+Or just fetch all resource links from the Spring Data-REST exposed API:
 
 ----
 $ curl localhost:8080/data-api
 ----
 
 You can also test out the Sandwich Cloud application in your browser by entering http://localhost:8080 in the browser's address bar.
+As well, you can launch sandwichcloud-restclient to test functionality:
+
+----
+$ java -jar sandwichcloud-restclient\target\sandwichcloud-restclient-0.0.7-SNAPSHOT.jar
+----

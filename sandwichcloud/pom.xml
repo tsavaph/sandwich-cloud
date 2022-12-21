@@ -44,11 +44,13 @@
             <artifactId>sandwichcloud-api</artifactId>
             <version>${sandwichcloud.version}</version>
         </dependency>
-        <!-- <dependency>
+
+        <!-- for configs -->
+        <dependency>
             <groupId>ru</groupId>
-            <artifactId>sandwichcloud-ui</artifactId>
+            <artifactId>sandwichcloud-web</artifactId>
             <version>${sandwichcloud.version}</version>
-        </dependency> -->
+        </dependency>
 
         <!-- Run against embedded H2 database by default -->
         <dependency>

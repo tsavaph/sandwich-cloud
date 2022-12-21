@@ -3,14 +3,23 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+
+  h2:
+    console:
+      enabled: true
+
   security:
     user:
       name: buzz
       password: infinity
 
+  data:
+    rest:
+      base-path: /data-api
   datasource:
     generate-unique-name: false
     name: sandwichcloud
+
 
 sandwich:
   orders:
@@ -36,7 +45,3 @@ spring:
 logging:
   level:
     sandwiches: WARN
-
-sandwich:
-  orders:
-    pageSize: 10

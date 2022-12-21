@@ -28,6 +28,7 @@
         <module>sandwichcloud-domain</module>
 		<module>sandwichcloud-security</module>
 		<module>sandwichcloud-web</module>
+		<module>sandwichcloud-restclient</module>
     </modules>
 
 	<repositories>

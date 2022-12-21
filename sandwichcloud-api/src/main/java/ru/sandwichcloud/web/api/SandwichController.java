@@ -2,6 +2,7 @@ package ru.sandwichcloud.web.api;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.sandwichcloud.Sandwich;
 import ru.sandwichcloud.data.SandwichRepository;
@@ -28,6 +29,12 @@ public class SandwichController {
     @GetMapping("/{id}")
     public Optional<Sandwich> sandwichById(@PathVariable("id") Long id) {
         return sandwichRepository.findById(id);
+    }
+
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Sandwich postSandwich(@RequestBody Sandwich sandwich) {
+        return sandwichRepository.save(sandwich);
     }
 
 }
