@@ -13,7 +13,7 @@
     <parent>
         <groupId>ru</groupId>
         <artifactId>sandwich-cloud</artifactId>
-        <version>0.0.7-SNAPSHOT</version>
+        <version>0.0.8-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -40,6 +40,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- For authorization server -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+
 
         <!-- Lombok -->
         <dependency>
