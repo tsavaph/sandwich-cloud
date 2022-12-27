@@ -10,8 +10,13 @@ spring:
 
   security:
     user:
-      name: buzz
-      password: infinity
+      name: test
+      password: test
+      roles: ROLE_ADMIN
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
 
   data:
     rest:

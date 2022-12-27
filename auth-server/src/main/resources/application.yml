@@ -1,0 +1,14 @@
+server:
+  port: 9000
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

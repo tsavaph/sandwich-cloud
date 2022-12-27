@@ -18,58 +18,36 @@ import static org.springframework.hateoas.client.Hop.rel;
 public class SandwichCloudClient {
 
     private RestTemplate rest;
-    private Traverson traverson;
 
-    public SandwichCloudClient(RestTemplate rest, Traverson traverson) {
+    private final String ingredientUrl = "http://localhost:8080/api/ingredients";
+
+    public SandwichCloudClient(RestTemplate rest) {
         this.rest = rest;
-        this.traverson = traverson;
     }
 
-
-    //
-    // Traverson with RestTemplate examples
-    //
-
-    public Iterable<Ingredient> getAllIngredientsWithTraverson() {
-        ParameterizedTypeReference<CollectionModel<Ingredient>> ingredientType =
-                new ParameterizedTypeReference<CollectionModel<Ingredient>>() {};
-
-        CollectionModel<Ingredient> ingredientRes =
-                traverson
-                        .follow("ingredients")
-                        .toObject(ingredientType);
-
-        Collection<Ingredient> ingredients = ingredientRes.getContent();
-        return ingredients;
+    public Ingredient getIngredientById(String ingredientId) {
+        return rest.getForObject( ingredientUrl + "/{id}",
+                Ingredient.class, ingredientId);
     }
 
-    public Ingredient addIngredient(Ingredient ingredient) {
-        String ingredientsUrl = traverson
-                .follow("ingredients")
-                .asLink()
-                .getHref();
-
-        return rest.postForObject(ingredientsUrl,
-                ingredient,
-                Ingredient.class);
+    public List<Ingredient> getAllIngredients() {
+        return rest.exchange(ingredientUrl,
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Ingredient>>() {})
+                .getBody();
     }
 
-
-
-    public Iterable<Sandwich> getRecentSandwichesWithTraverson() {
-        ParameterizedTypeReference<CollectionModel<Sandwich>> sandwichType =
-                new ParameterizedTypeReference<CollectionModel<Sandwich>>() {};
-
-        CollectionModel<Sandwich> sandwichRes =
-                traverson
-                        .follow(rel("sandwiches").withParameter("recent", 0))
-                        .toObject(sandwichType);
-
-        Collection<Sandwich> sandwiches = sandwichRes.getContent();
-        return sandwiches;
+    public void updateIngredient(Ingredient ingredient) {
+        rest.put(ingredientUrl + "/{id}",
+                ingredient, ingredient.getId());
     }
 
+    public Ingredient createIngredient(Ingredient ingredient) {
+        return rest.postForObject(ingredientUrl,
+                ingredient, Ingredient.class);
+    }
 
-
-
+    public void deleteIngredient(Ingredient ingredient) {
+        rest.delete(ingredientUrl + "/{id}",
+                ingredient.getId());
+    }
 }
