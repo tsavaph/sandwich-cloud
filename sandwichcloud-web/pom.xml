@@ -13,7 +13,7 @@
     <parent>
         <groupId>ru</groupId>
         <artifactId>sandwich-cloud</artifactId>
-        <version>0.0.8-SNAPSHOT</version>
+        <version>0.0.9-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -84,6 +84,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-messaging-rabbitmq</artifactId>
+            <version>${sandwichcloud.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import ru.sandwichcloud.SandwichOrder;
 import ru.sandwichcloud.User;
 import ru.sandwichcloud.data.OrderRepository;
+import ru.sandwichcloud.messaging.OrderMessagingService;
 
 @Slf4j
 @Controller
@@ -23,11 +24,14 @@ public class OrderController {
 
     private OrderRepository orderRepo;
     private OrderProps orderProps;
+    private OrderMessagingService orderMessagingService;
 
     public OrderController(OrderRepository orderRepo,
-                           OrderProps orderProps) {
+                           OrderProps orderProps,
+                           OrderMessagingService orderMessagingService) {
         this.orderRepo = orderRepo;
         this.orderProps = orderProps;
+        this.orderMessagingService = orderMessagingService;
     }
     @GetMapping("/current")
     public String orderForm(@AuthenticationPrincipal User user,
@@ -59,7 +63,8 @@ public class OrderController {
         }
 
         order.setUser(user);
-        orderRepo.save(order);
+        SandwichOrder messagingOrder = orderRepo.save(order);
+        orderMessagingService.sendOrder(messagingOrder);
         sessionStatus.setComplete();
 
         return "redirect:/";

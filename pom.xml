@@ -5,7 +5,7 @@
 
 	<groupId>ru</groupId>
 	<artifactId>sandwich-cloud</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -28,7 +28,8 @@
         <module>sandwichcloud-domain</module>
 		<module>sandwichcloud-security</module>
 		<module>sandwichcloud-web</module>
-		<module>sandwichcloud-restclient</module>
+		<module>sandwichcloud-messaging-rabbitmq</module>
+		<module>sandwichcloud-kitchen</module>
     </modules>
 
 	<repositories>

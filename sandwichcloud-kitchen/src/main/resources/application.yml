@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    template:
+      receive-timeout: 300000
+server:
+  port: 8888
