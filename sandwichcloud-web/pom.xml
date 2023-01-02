@@ -89,7 +89,16 @@
             <groupId>ru</groupId>
             <artifactId>sandwichcloud-messaging-rabbitmq</artifactId>
             <version>${sandwichcloud.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-messaging-kafka</artifactId>
+            <version>${sandwichcloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru</groupId>
+            <artifactId>sandwichcloud-kitchen</artifactId>
+            <version>${sandwichcloud.version}</version>
         </dependency>
     </dependencies>
 

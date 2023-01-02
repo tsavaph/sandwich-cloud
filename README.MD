@@ -9,7 +9,10 @@ $ ./mvnw package
 After building:
 
 ----
-$ java -jar tacocloud/target/taco-cloud-0.0.9-SNAPSHOT.jar
+$ java -jar sandwichcloud/target/sandwichcloud-0.0.9-SNAPSHOT.jar --spring.profiles.active=kafka
+$ java -jar sandwichcloud/target/sandwichcloud-0.0.9-SNAPSHOT.jar --spring.profiles.active=rabbit
+$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.9-SNAPSHOT.jar --spring.profiles.active=kafka
+$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.9-SNAPSHOT.jar --spring.profiles.active=rabbit
 ----
 
 Once the application is running, you can poke at the API using `curl` like this:

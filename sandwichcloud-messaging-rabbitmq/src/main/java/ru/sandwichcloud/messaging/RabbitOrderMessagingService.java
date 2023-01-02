@@ -5,9 +5,11 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ru.sandwichcloud.SandwichOrder;
 
+@Profile("rabbit")
 @Service
 public class RabbitOrderMessagingService implements OrderMessagingService {
 

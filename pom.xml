@@ -30,6 +30,7 @@
 		<module>sandwichcloud-web</module>
 		<module>sandwichcloud-messaging-rabbitmq</module>
 		<module>sandwichcloud-kitchen</module>
+		<module>sandwichcloud-messaging-kafka</module>
     </modules>
 
 	<repositories>
