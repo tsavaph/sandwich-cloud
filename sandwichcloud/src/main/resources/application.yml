@@ -3,7 +3,6 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
-
   h2:
     console:
       enabled: true
@@ -17,7 +16,6 @@ spring:
       resource-server:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
-
   data:
     rest:
       base-path: /data-api
@@ -34,7 +32,6 @@ sandwich:
   discount:
     codes:
       abcdef: 10
-
 ---
 
 spring:

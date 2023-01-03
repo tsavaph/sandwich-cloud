@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>sandwichcloud-security</artifactId>
+    <artifactId>sandwichcloud-messaging-kafka</artifactId>
     <packaging>jar</packaging>
 
-    <name>sandwichcloud-security</name>
-    <description>Sandwich Cloud Security</description>
+    <name>sandwichcloud-messaging-kafka</name>
+    <description>Sandwich Cloud Messaging (Kafka)</description>
 
     <parent>
-        <groupId>ru</groupId>
         <artifactId>sandwich-cloud</artifactId>
+        <groupId>ru</groupId>
         <version>0.0.9-SNAPSHOT</version>
     </parent>
 
@@ -23,55 +21,41 @@
     </properties>
 
     <dependencies>
-        <!-- Sandwich Cloud dependencies -->
         <dependency>
-            <groupId>ru</groupId>
-            <artifactId>sandwichcloud-data</artifactId>
-            <version>${sandwichcloud.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ru</groupId>
             <artifactId>sandwichcloud-domain</artifactId>
             <version>${sandwichcloud.version}</version>
         </dependency>
-
-        <!-- Necessary Boot starters -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- For authorization server -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
-
-
-
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
 </project>
-
-
-
-
-
-
-
-
-
