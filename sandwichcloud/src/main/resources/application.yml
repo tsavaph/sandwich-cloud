@@ -3,7 +3,6 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
-
   h2:
     console:
       enabled: true
@@ -33,7 +32,6 @@ sandwich:
   discount:
     codes:
       abcdef: 10
-
 ---
 
 spring:

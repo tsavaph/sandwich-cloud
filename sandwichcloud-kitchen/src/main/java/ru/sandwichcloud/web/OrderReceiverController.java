@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import ru.sandwichcloud.domain.SandwichOrder;
 import ru.sandwichcloud.kitchen.KitchenUI;
-import ru.sandwichcloud.kitchen.messaging.OrderReceiver;
 
 import java.util.List;
 

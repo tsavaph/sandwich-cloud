@@ -18,7 +18,7 @@ public class OrderListener {
         this.kitchenUI = kitchenUI;
     }
 
-    @KafkaListener(topics = "sandwichcloud.orders.topic", groupId = "sandwichcloud_kitchen")
+    @KafkaListener(topics = "sandwichcloud.orders.topic11", groupId = "${spring.kafka.consumer.group-id}")
     public void handle(SandwichOrder sandwichOrder, ConsumerRecord<String, SandwichOrder> record) {
         log.info("Received from partition {} with timestamp {}",
                 record.partition(),

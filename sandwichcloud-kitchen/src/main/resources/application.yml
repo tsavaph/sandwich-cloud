@@ -11,24 +11,3 @@ spring:
   rabbitmq:
     template:
       receive-timeout: 300000
-
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: kafka
-
-    kafka:
-      bootstrap-servers:
-        - localhost:9092
-      template:
-        default-topic: sandwichcloud.orders.topic
-      consumer:
-        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        "[spring.json.trusted.packages]": sandwichcloud
-#        group-id: sandwichcloud_kitchen
-#        properties:
-#          spring.json.trusted.packages: sandwichcloud
