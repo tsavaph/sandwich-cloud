@@ -1,6 +1,6 @@
 package ru.sandwichcloud.kitchen.messaging;
 
-import ru.sandwichcloud.domain.SandwichOrder;
+import ru.sandwichcloud.SandwichOrder;
 
 
 public interface OrderReceiver {

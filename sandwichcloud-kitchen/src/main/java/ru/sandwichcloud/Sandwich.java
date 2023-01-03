@@ -1,4 +1,4 @@
-package ru.sandwichcloud.domain;
+package ru.sandwichcloud;
 
 import lombok.Data;
 

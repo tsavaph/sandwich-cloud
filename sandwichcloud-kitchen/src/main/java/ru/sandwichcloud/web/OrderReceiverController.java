@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
-import ru.sandwichcloud.domain.SandwichOrder;
+import ru.sandwichcloud.SandwichOrder;
 import ru.sandwichcloud.kitchen.KitchenUI;
 
 import java.util.List;

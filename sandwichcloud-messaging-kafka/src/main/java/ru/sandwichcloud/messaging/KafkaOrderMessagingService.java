@@ -28,7 +28,5 @@ public class KafkaOrderMessagingService implements OrderMessagingService {
                 .setHeader(KafkaHeaders.TOPIC, topic.name())
                 .build();
         kafkaTemplate.send(message);
-
-        //kafkaTemplate.send("sandwichcloud.orders.topic", order);
     }
 }

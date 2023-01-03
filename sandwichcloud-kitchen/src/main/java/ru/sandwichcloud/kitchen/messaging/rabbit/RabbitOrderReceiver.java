@@ -4,7 +4,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import ru.sandwichcloud.domain.SandwichOrder;
+import ru.sandwichcloud.SandwichOrder;
 import ru.sandwichcloud.kitchen.messaging.OrderReceiver;
 
 @Profile("rabbit")

@@ -5,7 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import ru.sandwichcloud.domain.SandwichOrder;
+import ru.sandwichcloud.SandwichOrder;
 import ru.sandwichcloud.kitchen.KitchenUI;
 
 @Component
@@ -18,7 +18,7 @@ public class OrderListener {
         this.kitchenUI = kitchenUI;
     }
 
-    @KafkaListener(topics = "sandwichcloud.orders.topic11", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "sandwichcloud.orders.topic", groupId = "${spring.kafka.consumer.group-id}")
     public void handle(SandwichOrder sandwichOrder, ConsumerRecord<String, SandwichOrder> record) {
         log.info("Received from partition {} with timestamp {}",
                 record.partition(),

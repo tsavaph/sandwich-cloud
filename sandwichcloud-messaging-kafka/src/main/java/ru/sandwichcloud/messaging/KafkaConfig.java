@@ -13,7 +13,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic topic(){
-        return TopicBuilder.name("sandwichcloud.orders.topic11")
+        return TopicBuilder.name("sandwichcloud.orders.topic")
                 .build();
     }
 }

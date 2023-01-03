@@ -3,7 +3,7 @@ package ru.sandwichcloud.kitchen;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.sandwichcloud.domain.SandwichOrder;
+import ru.sandwichcloud.SandwichOrder;
 
 import java.util.ArrayList;
 import java.util.List;
