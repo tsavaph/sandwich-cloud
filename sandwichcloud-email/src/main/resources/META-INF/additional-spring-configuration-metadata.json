@@ -1,0 +1,37 @@
+{
+  "properties":
+  [
+    {
+      "name": "sandwichcloud.email.host",
+      "type": "java.lang.String",
+      "description": "Sandwich Cloud email host."
+    },
+    {
+      "name": "sandwichcloud.email.mail",
+      "type": "java.lang.String",
+      "description": "Sandwich Cloud email mailbox."
+    },
+    {
+      "name": "sandwichcloud.email.username",
+      "type": "java.lang.String",
+      "description": "Sandwich Cloud email username."
+    },
+    {
+      "name": "sandwichcloud.email.password",
+      "type": "java.lang.String",
+      "description": "Sandwich Cloud email password."
+    },
+    {
+      "name": "sandwichcloud.email.poll-rate",
+      "type": "java.lang.Long",
+      "description": "Sandwich Cloud email poll rate."
+    },
+    {
+      "name": "sandwichcloud.api.url",
+      "type": "java.lang.String",
+      "description": "REST Api url for e-mail orders."
+    }
+  ]
+}
+
+

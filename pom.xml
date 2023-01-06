@@ -5,7 +5,7 @@
 
 	<groupId>ru</groupId>
 	<artifactId>sandwich-cloud</artifactId>
-	<version>0.0.9-SNAPSHOT</version>
+	<version>0.0.10-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -31,6 +31,7 @@
 		<module>sandwichcloud-messaging-rabbitmq</module>
 		<module>sandwichcloud-kitchen</module>
 		<module>sandwichcloud-messaging-kafka</module>
+		<module>sandwichcloud-email</module>
     </modules>
 
 	<repositories>

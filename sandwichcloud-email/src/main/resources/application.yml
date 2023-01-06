@@ -1,0 +1,16 @@
+server:
+  port: 8484
+spring:
+  main:
+    web-application-type: none
+
+sandwichcloud:
+  email:
+    host: imap.yandex.ru
+    port: 993
+    mailbox: INBOX
+    username: tsavaph
+    password: tfdogwnuzvpmsopj
+    poll-rate: 10000
+  api:
+    url: http://localhost:8080/orders/fromEmail

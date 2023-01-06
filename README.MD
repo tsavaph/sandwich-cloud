@@ -9,10 +9,10 @@ $ ./mvnw package
 After building:
 
 ----
-$ java -jar sandwichcloud/target/sandwichcloud-0.0.9-SNAPSHOT.jar --spring.profiles.active=kafka
-$ java -jar sandwichcloud/target/sandwichcloud-0.0.9-SNAPSHOT.jar --spring.profiles.active=rabbit
-$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.9-SNAPSHOT.jar --spring.profiles.active=kafka
-$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.9-SNAPSHOT.jar --spring.profiles.active=rabbit
+$ java -jar sandwichcloud/target/sandwichcloud-0.0.10-SNAPSHOT.jar --spring.profiles.active=kafka
+$ java -jar sandwichcloud/target/sandwichcloud-0.0.10-SNAPSHOT.jar --spring.profiles.active=rabbit
+$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.10-SNAPSHOT.jar --spring.profiles.active=kafka
+$ java -jar sandwichcloud-kitchen/target/sandwichcloud-kitchen-0.0.10-SNAPSHOT.jar --spring.profiles.active=rabbit
 ----
 
 Once the application is running, you can poke at the API using `curl` like this:
@@ -63,5 +63,5 @@ You can also test out the Sandwich Cloud application in your browser by entering
 As well, you can launch sandwichcloud-restclient to test functionality:
 
 ----
-$ java -jar sandwichcloud-restclient\target\sandwichcloud-restclient-0.0.9-SNAPSHOT.jar
+$ java -jar sandwichcloud-restclient\target\sandwichcloud-restclient-0.0.10-SNAPSHOT.jar
 ----
