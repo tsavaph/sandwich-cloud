@@ -51,63 +51,39 @@ public class EmailToOrderTransformer extends AbstractMailMessageTransformer<Emai
 
     private String getTextFromMessage(Message message) throws MessagingException, IOException {
         String result = "";
-        log.info("LOG1");
         if (message.isMimeType("text/plain")) {
-            log.info("LOG2");
             result = message.getContent().toString();
-            log.info("LOG3");
         } else if (message.isMimeType("multipart/*")) {
-            log.info("LOG4");
             MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
-            log.info("LOG5");
             result = getTextFromMimeMultipart(mimeMultipart);
-            log.info("LOG6");
         }
-        log.info("LOG7");
         return result;
     }
 
     private String getTextFromMimeMultipart(
             MimeMultipart mimeMultipart)  throws MessagingException, IOException{
         String result = "";
-        log.info("LOG8");
         int count = mimeMultipart.getCount();
-        log.info("LOG9");
         for (int i = 0; i < count; i++) {
-            log.info("LOG10");
             BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-            log.info("LOG11");
             if (bodyPart.isMimeType("text/plain")) {
-                log.info("LOG12");
                 result = result + "\n" + bodyPart.getContent();
-                log.info("LOG12");
-                break; // without break same text appears twice in my tests
+                break;
             } else if (bodyPart.getContent() instanceof MimeMultipart){
-                log.info("LOG13");
                 result = result + getTextFromMimeMultipart((MimeMultipart)bodyPart.getContent());
-                log.info("LOG14");
             }
-            log.info("LOG15");
         }
-        log.info("LOG16");
         return result;
     }
-
-
 
     private EmailOrder processPayload(Message mailMessage) {
         try {
             String subject = mailMessage.getSubject();
 
-            log.info("LOGLOGLOG");
-            log.info("SUBJECT " + subject);
-            log.info(getTextFromMessage(mailMessage));
-
             if(subject.toUpperCase().contains(SUBJECT_KEYWORDS)) {
                 String email = ((InternetAddress) mailMessage.getFrom()[0]).getAddress();
                 String content = getTextFromMessage(mailMessage);
-                log.info("CONTENT: + \n" + content);
-                log.info("\n");
+
                 return parseEmailToOrder(email, content);
             }
         } catch (MessagingException e) {
@@ -132,19 +108,19 @@ public class EmailToOrderTransformer extends AbstractMailMessageTransformer<Emai
                 String[] ingredientsSplit = ingredients.split(",");
                 List<String> ingredientCodes = new ArrayList<>();
 
+                Sandwich sandwich = new Sandwich(sandwichName);
                 for (String ingredientName : ingredientsSplit) {
                     String code = lookupIngredientCode(ingredientName.trim());
 
                     if (code != null)
                         ingredientCodes.add(code);
 
-                    Sandwich sandwich = new Sandwich(sandwichName);
                     sandwich.setIngredients(ingredientCodes);
-                    order.addSandwich(sandwich);
                 }
+                order.addSandwich(sandwich);
             }
         }
-        log.info("ORDER + \n");
+        log.info("ORDER");
         log.info(order.toString());
         return order;
     }
@@ -153,11 +129,12 @@ public class EmailToOrderTransformer extends AbstractMailMessageTransformer<Emai
 
         for (Ingredient ingredient : ALL_INGREDIENTS) {
             String ucIngredientName = ingredientName.toUpperCase();
+            String ingredientUpperCase = ingredient.getName().toUpperCase();
 
             if (LevenshteinDistance.getDefaultInstance()
-                    .apply(ucIngredientName, ingredient.getName()) < 3 ||
-                ucIngredientName.contains(ingredient.getName()) ||
-                ingredient.getName().contains(ucIngredientName)) {
+                    .apply(ucIngredientName, ingredientUpperCase) < 3 ||
+                ucIngredientName.contains(ingredientUpperCase) ||
+                    ingredientUpperCase.contains(ucIngredientName)) {
 
                 return ingredient.getCode();
             }

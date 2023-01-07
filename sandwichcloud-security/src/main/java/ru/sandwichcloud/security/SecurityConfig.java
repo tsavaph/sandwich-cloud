@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,11 +26,14 @@ public class SecurityConfig {
         http
                 .csrf()
                     .ignoringRequestMatchers(PathRequest.toH2Console())
+                    .ignoringRequestMatchers("/email-api/orders/from-email")
                 .and()
                 .headers(
                         headers -> headers.frameOptions().sameOrigin()
                 )
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST,"/email-api/orders/from-email").permitAll()
+                .requestMatchers(HttpMethod.GET,"/email-api/orders/from-email").permitAll()
                 .requestMatchers(HttpMethod.GET,"/design","/orders").hasRole("USER")
                 .requestMatchers(HttpMethod.POST,"/design","/orders").hasRole("USER")
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
@@ -38,7 +42,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/tacos", "/api/orders/**").permitAll()
                 .requestMatchers("/**").permitAll()
                 .and()
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .formLogin(
                         form -> form
                                 .loginPage("/login")

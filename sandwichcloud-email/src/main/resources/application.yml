@@ -10,7 +10,7 @@ sandwichcloud:
     port: 993
     mailbox: INBOX
     username: tsavaph
-    password: tfdogwnuzvpmsopj
+    password: XXXxxxxXXXXxxxxxXXXX
     poll-rate: 10000
   api:
-    url: http://localhost:8080/orders/fromEmail
+    url: http://localhost:8080/email-api/orders/from-email

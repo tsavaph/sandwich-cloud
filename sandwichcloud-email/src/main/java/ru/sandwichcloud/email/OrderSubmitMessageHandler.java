@@ -18,7 +18,7 @@ public class OrderSubmitMessageHandler implements GenericHandler<EmailOrder> {
 
     @Override
     public Object handle(EmailOrder payload, MessageHeaders headers) {
-        restTemplate.postForObject(apiProperties.getUrl(), payload, String.class);
+        restTemplate.postForObject(apiProperties.getUrl(), payload.toString(), String.class);
         return null;
     }
 }
