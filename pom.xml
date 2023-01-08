@@ -32,6 +32,8 @@
 		<module>sandwichcloud-kitchen</module>
 		<module>sandwichcloud-messaging-kafka</module>
 		<module>sandwichcloud-email</module>
+		<module>auth-admin</module>
+		<module>auth-server</module>
     </modules>
 
 	<repositories>
